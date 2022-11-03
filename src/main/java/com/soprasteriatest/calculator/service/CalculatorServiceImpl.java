@@ -31,9 +31,9 @@ public class CalculatorServiceImpl  implements  CalculatorService{
     }
 
     @Override
-    public double divide(double num1, double num2) throws Exception {
+    public double divide(double num1, double num2) throws ArithmeticException {
         if(num2 == 0){
-            throw new Exception("Can't divide by zero");
+            throw new ArithmeticException("Can't divide by zero");
         }
         tracer.trace("Multiplying "+ num1+ " and "+ num2);
         tracer.trace("The result of the operation is "+ (num1 / num2));

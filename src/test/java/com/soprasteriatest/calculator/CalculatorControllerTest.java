@@ -13,8 +13,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -39,7 +37,6 @@ public class CalculatorControllerTest {
     void testShouldAddTwoNumbersSuccessfully() {
         CalculatorRequest request = new CalculatorRequest(3, 4);
         CalculatorResponse response = calculatorController.addition(request);
-        System.out.println(response.getResult());
     }
 
     @Test
@@ -62,12 +59,11 @@ public class CalculatorControllerTest {
     }
 
     @Test
-    void shouldReturn500DueExceptionCausedByDivisionByZero() throws Exception {
+    void shouldReturn400DueExceptionCausedByDivisionByZero() throws Exception {
         CalculatorRequest request = new CalculatorRequest(0, 0);
         String requestJSON = objectMapper.writeValueAsString(request);
-        assertThrows(Exception.class, () -> {
-            mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/calculator/divide").contentType(MediaType.APPLICATION_JSON).content(requestJSON)).andExpect(status().isInternalServerError());
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/calculator/divide").contentType(MediaType.APPLICATION_JSON).content(requestJSON)).andExpect(status().isBadRequest());
 
-        });
+
     }
 }
