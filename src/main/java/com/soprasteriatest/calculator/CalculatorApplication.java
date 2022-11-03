@@ -8,8 +8,6 @@ import io.corp.calculator.TracerImpl;
 public class CalculatorApplication {
 
 	public static void main(String[] args) {
-		TracerImpl tracer = new TracerImpl();
-		tracer.trace("Bon Jour");
 		SpringApplication.run(CalculatorApplication.class, args);
 	}
 

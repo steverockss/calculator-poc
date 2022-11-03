@@ -25,4 +25,16 @@ public class CalculatorController {
         double result = calculatorService.subtract(calculatorRequest.getFirstNum(), calculatorRequest.getSecondNum());
         return new CalculatorResponse(result);
     }
+
+    @PostMapping( "/multiply")
+    public CalculatorResponse multiply(@RequestBody CalculatorRequest calculatorRequest){
+        double result = calculatorService.multiply(calculatorRequest.getFirstNum(), calculatorRequest.getSecondNum());
+        return new CalculatorResponse(result);
+    }
+    @PostMapping( "/divide")
+    public CalculatorResponse divide(@RequestBody CalculatorRequest calculatorRequest) throws Exception {
+        double result = calculatorService.divide(calculatorRequest.getFirstNum(), calculatorRequest.getSecondNum());
+        return new CalculatorResponse(result);
+    }
+
 }
