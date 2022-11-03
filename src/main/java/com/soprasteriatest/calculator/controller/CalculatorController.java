@@ -1,6 +1,7 @@
 package com.soprasteriatest.calculator.controller;
 
 import com.soprasteriatest.calculator.dto.CalculatorRequest;
+import com.soprasteriatest.calculator.dto.CalculatorResponse;
 import com.soprasteriatest.calculator.service.CalculatorServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,8 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class CalculatorController {
     private final CalculatorServiceImpl calculatorService;
-    @PostMapping
-    public void addition(@RequestBody CalculatorRequest calculatorRequest){
-        calculatorService.add(calculatorRequest.getFirstNum(), calculatorRequest.getSecondNum());
+    @PostMapping( "/add")
+    public CalculatorResponse addition(@RequestBody CalculatorRequest calculatorRequest){
+        double result = calculatorService.add(calculatorRequest.getFirstNum(), calculatorRequest.getSecondNum());
+        return new CalculatorResponse(result);
+    }
+
+    @PostMapping( "/subtract")
+    public CalculatorResponse subtraction(@RequestBody CalculatorRequest calculatorRequest){
+        double result = calculatorService.subtract(calculatorRequest.getFirstNum(), calculatorRequest.getSecondNum());
+        return new CalculatorResponse(result);
     }
 }
